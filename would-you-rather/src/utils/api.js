@@ -1,24 +1,28 @@
 import {
     _getUsers,
     _getQuestions,
-    _saveQuestionAnswer,
     _saveQuestion,
-} from './_DATA.js'
+    _saveQuestionAnswer,
+} from './_DATA'
 
-export function getInitialData() {
-    return Promise.all([
-        _getUsers(),
-        _getQuestions(),
-    ]).then(([users, questions]) => ({
-        users,
-        questions,
-    }))
+export function getInitialUsers() {
+    return _getUsers()
+        .then(users => ({
+           users 
+        }))
 }
 
-export function saveQuestionAnswer(info) {
-    return _saveQuestionAnswer(info)
+export function getInitialCards() {
+    return _getQuestions()
+        .then(questions => ({
+            questions 
+        }))
 }
 
-export function saveQuestion(info) {
+export function saveToAPICard (info) {
     return _saveQuestion(info)
+}
+
+export function saveToAPICardAnswer (info) {
+    return _saveQuestionAnswer(info)
 }
