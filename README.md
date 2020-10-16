@@ -5,13 +5,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # INSTALATION
 Enter the would-you-rather folder than install all modules with 
-```
+`
 npm install
-```
+`
 than start the server with
-```
+`
 npm start
-```
+`
 
 ## Available Scripts
 
