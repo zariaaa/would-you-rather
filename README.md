@@ -1,7 +1,17 @@
-# would-you-rather
+# Would Youu Rather?
 React-Redux based game.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+# INSTALATION
+Enter the would-you-rather folder than install all modules with 
+```
+npm install
+```
+than start the server with
+```
+npm start
+```
 
 ## Available Scripts
 
