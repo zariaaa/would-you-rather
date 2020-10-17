@@ -1,35 +1,44 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
-import userImg from '../user.png';
+import { withRouter } from 'react-router-dom'
 
 class Login extends Component {
     state = {
-        selectedUser: ''
+        selectedUser: '',
     }
 
     handleLogin = (e) => {
         e.preventDefault()
+        const { history } = this.props
         const { selectedUser } = this.state
         const { setAuthedUser } = this.props
 
         if (selectedUser) {
+            const pathname = localStorage.getItem('pathname');
             setAuthedUser(selectedUser)
+            if(pathname){
+                history.push(pathname);
+            }
+            else{
+                history.push('/');
+            }
+            localStorage.removeItem('pathname');
         } else alert('Select a user!')
-
     }
 
     onSelectUser = (selectedUser) => this.setState({ selectedUser })
 
     render () {
-        const { users } = this.props
-        const { selectedUser } = this.state
+        const { users} = this.props
+        const { selectedUser} = this.state
 
         return (
+           
             <Fragment>
                 <div className='form signin-form'>
                     <div className='card-header'>
-                        <p className='card-title'>Would You Rather - login</p>
+                        <p className='card-title'>Would You Rather Login</p>
                     </div>
                     <div className='card-wrapper'>
                         <form onSubmit={this.handleLogin}>
@@ -37,7 +46,7 @@ class Login extends Component {
                             <div className='signin-body'>
                                 <img 
                                     src={selectedUser === '' 
-                                    ? userImg
+                                    ? 'https://thumbnail.imgbin.com/1/25/9/imgbin-youtube-user-computer-icons-information-youtube-B58QuatNrN3FjqHtDE02EytZ2_t.jpg'
                                     : users[selectedUser].avatarURL}
                                     alt={users[selectedUser]}
                                     className='user-avatar'/> 
@@ -64,9 +73,10 @@ class Login extends Component {
     }
 }
 
-function mapStateToProps ({ users }) {
+function mapStateToProps ({ users , authedUser}) {
     return {
-        users
+        users,
+        authedUser
     }
 }
 
@@ -78,4 +88,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))

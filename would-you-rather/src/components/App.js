@@ -9,6 +9,8 @@ import LoadingBar from 'react-redux-loading-bar'
 import AddCard from './AddCard'
 import Scoreboard from './Scoreboard'
 import Error404 from './Error404'
+import { PrivateRoute } from './PrivateRoute'
+
 
 class App extends Component {
   componentDidMount() {
@@ -22,17 +24,12 @@ class App extends Component {
         <Fragment>
           <LoadingBar style={{ backgroundColor: '#fff'}}/>
           <Switch>
-            { 
-              this.props.authedUser === null
-              ? <Route path='/' exact component={Login} />
-              : <Fragment>
-                  <Route path='/' exact component={Dashboard} />
-                  <Route path='/questions/:question_id' component={CardContent} />
-                  <Route path='/add' exact component={AddCard} />
-                  <Route path='/scoreboard' exact component={Scoreboard} />
-                </Fragment>
-            }
-            <Route component={Error404} />
+                <Route path='/login' exact component={Login} />
+                <PrivateRoute authedUser={this.props.authedUser} path='/questions/:question_id' component={CardContent} />
+                <PrivateRoute authedUser={this.props.authedUser} path='/add' exact component={AddCard} />
+                <PrivateRoute authedUser={this.props.authedUser} path='/leaderboard' exact component={Scoreboard} />
+                <PrivateRoute authedUser={this.props.authedUser} path='/' component={Dashboard} />
+                <Route component={Error404} />
           </Switch>
         </Fragment>
       </Router>

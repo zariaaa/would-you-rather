@@ -65,17 +65,18 @@ class Dashboard extends Component {
 function mapStateToProps ({ cards, authedUser, users, loadingBar }) {
     const user = users[authedUser]
 
-    const completedCards = Object.keys(cards).length !== 0
-        ? Object.keys(user.answers)
-            .sort((a,b) => cards[b].timestamp - cards[a].timestamp)
-        : []
+    const completedCardsIdsArray =  user && Object.keys(user.answers);
 
-    const uncompletedCards = Object.keys(cards).length !== 0
-        ? Object.keys(cards)
-            .filter(cardID => !completedCards.includes(cardID))
-            .sort((a,b) => cards[b].timestamp - cards[a].timestamp)
-        : []
+    const uncompletedCardsIds = Object.keys(cards).length > 0 ? Object.keys(cards).filter(cardID => !completedCardsIdsArray.includes(cardID)) : [];
 
+    const completedCards = completedCardsIdsArray.map((cardID) => {
+        return cards[cardID];
+    }).sort((a,b) => b.timestamp - a.timestamp ).map((card) => card !== undefined && card.id);
+    
+    const uncompletedCards = uncompletedCardsIds.map((cardID) => {
+        return cards[cardID];
+    }).sort((a,b) => b.timestamp - a.timestamp ).map((card) => card.id);
+    
     return {
         completedCards,
         uncompletedCards,

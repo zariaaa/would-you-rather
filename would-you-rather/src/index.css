@@ -204,6 +204,15 @@ hr {
   text-decoration: none;
 }
 
+.nav-li.loggedOut {
+  padding: 10px;
+  user-select: none;
+  cursor: default;
+  color: #fff;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
 .nav-li.user-name{
   display: flex;
   align-items: center;

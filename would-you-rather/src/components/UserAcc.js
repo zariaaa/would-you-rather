@@ -7,7 +7,7 @@ class UserAcc extends Component {
     handleLogout = () => {
         const { setAuthedUser, history } = this.props
         setAuthedUser(null)
-        history.push('/')
+        history.push('/login')
     }
 
     render () {
@@ -20,9 +20,9 @@ class UserAcc extends Component {
                     </li>
                     <li className='user-name nav-li'>
                         <img 
-                                    src={avatar}
-                                    alt={`Avatar of ${avatar}`}
-                                    className='user-avatar small-sircle'/>
+                            src={avatar}
+                            alt={`Avatar of ${avatar}`}
+                            className='user-avatar small-sircle'/>
                     </li>
                     <li className='padding-zero user-name nav-li'>
                         {authedUser}
@@ -34,7 +34,8 @@ class UserAcc extends Component {
 }
 
 function mapStateToProps({ authedUser, users }) {
-    const avatar = users[authedUser].avatarURL
+    const avatar = users[authedUser] && users[authedUser].avatarURL
+
     return {
         authedUser,
         avatar

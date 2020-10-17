@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-export default function Menu () {
+const Menu = (props) => {
     return (
         <nav>
             <ul className='nav'>
@@ -16,11 +16,14 @@ export default function Menu () {
                     </NavLink>
                 </li>
                 <li className='nav-li'>
-                    <NavLink className='nav-li' to='/scoreboard' exact activeClassName='active'>
-                        Scoreboard
+                    <NavLink className='nav-li' to='/leaderboard' exact activeClassName='active'>
+                            Leaderboard
                     </NavLink>
                 </li>
+                
             </ul>        
         </nav>
     )
 }
+
+export default Menu;

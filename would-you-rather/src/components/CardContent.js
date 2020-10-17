@@ -4,6 +4,7 @@ import MainMenu from './MainMenu'
 import { formatDate } from '../utils/helpers'
 import { FaCheck } from 'react-icons/fa'
 import { handleSaveCardAnswer } from '../actions/shared'
+import Error404 from './Error404'
 
 class CardContent extends Component {
     state = {
@@ -22,22 +23,24 @@ class CardContent extends Component {
         const { saveCardAnswer } = this.props
         const answer = this.state.selectedQuestion
 
-        // i have succesfully got the answer text now check the _data file to see what is the expected arguments
-
         saveCardAnswer(answer)
     }
 
     render () {
+        if(this.props.isWrongID){
+            return ( <Error404/>)
+        }
         const { card, authorAvatar, timestamp, author, QuestionOne, QuestionTwo, answered, isOneAnswered, isTwoAnswered } = this.props
         const QuestionOneVotes = card.QuestionOne.votes.length
         const QuestionTwoVotes = card.QuestionTwo.votes.length
         const QuestionOnePercentage = (QuestionOneVotes / (QuestionOneVotes + QuestionTwoVotes) * 100).toFixed(2)
         const QuestionTwoPercentage = (QuestionTwoVotes / (QuestionOneVotes + QuestionTwoVotes) * 100).toFixed(2)
+
         return (
             <Fragment>
                 <MainMenu />
-                <div className='form margin card-content'>
 
+                <div className='form margin card-content'>
                     <div className='card-header'>
                         <p className='card-title'>Would You Rather</p>
                     </div>
@@ -118,6 +121,14 @@ class CardContent extends Component {
 function mapStateToProps ({authedUser, cards, users}, props) {
     const { question_id } = props.match.params
     const card = cards[question_id]
+
+    if (card === undefined) {
+        
+        return {
+            isWrongID: true
+        }
+    }
+
     const authorAvatar = users[card.author].avatarURL
     const author = users[card.author].id
     const timestamp = formatDate (card.timestamp)
@@ -126,6 +137,7 @@ function mapStateToProps ({authedUser, cards, users}, props) {
     const isOneAnswered = card.QuestionOne.votes.includes(authedUser)
     const isTwoAnswered = card.QuestionTwo.votes.includes(authedUser)
     const answered = isOneAnswered || isTwoAnswered
+    const isWrongID = false
 
     return {
         authorAvatar,
@@ -141,6 +153,7 @@ function mapStateToProps ({authedUser, cards, users}, props) {
         cards,
         authedUser,
         question_id,
+        isWrongID
     }
 }
 

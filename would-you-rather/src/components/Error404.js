@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 function Error404 () {
     return (
         <div className='center'>
-            <h1>Oops!</h1>
+            <h1>Oops! PAGE NOT FOUND</h1>
             <p>We can't seem to find the page you're looking for.</p>
             <p className='padding-top'>
                 <NavLink className='click-here' to='/'>Click here</NavLink> to go back to home page
