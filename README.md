@@ -1,17 +1,26 @@
 # Would You Rather?
-React-Redux based game.
+"Would You Rather?" is a game that is close to Quiz Game. The main subject is: A user is asked a question in the form: " Would you rather **questionOne** or **questionTwo** ". Answering neither or both is not allowed.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In this game there is a Leaderboard where can be seen every person who was answered and on how many questions, what are their ranks and avatars and etc.
+Users will be able to answer questions, see which questions they havn't answered and check all answered and unanswered questions.
+answered
 
 # Installation
-Enter the would-you-rather folder than install all modules with 
+Enter the would-you-rather folder 
+
+```javascript
+cd would-you-rather
 ```
+
+than install all modules with 
+
+```javascript
 npm install
 ```
 
 than start the server with
 
-```
+```javascript
 npm start
 ```
 
