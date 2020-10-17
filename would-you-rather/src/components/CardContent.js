@@ -19,11 +19,15 @@ class CardContent extends Component {
 
     submitAnswer = (e) => {
         e.preventDefault()
-
         const { saveCardAnswer } = this.props
-        const answer = this.state.selectedQuestion
-
-        saveCardAnswer(answer)
+        if(!this.state.selectedQuestion){
+            alert("PLEASE, SELECT ONE OF THE OPTIONS!");
+        }
+        else{
+            const answer = this.state.selectedQuestion
+            saveCardAnswer(answer)
+        }
+       
     }
 
     render () {
@@ -92,7 +96,8 @@ class CardContent extends Component {
                                             type="radio" 
                                             name='select_question' 
                                             value="QuestionOne"
-                                            onClick={this.selectRadio}/>
+                                            onClick={this.selectRadio}
+                                            />
                                         <span className='checkmark'></span>
                                     </label>
 
