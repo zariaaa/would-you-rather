@@ -2,16 +2,16 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import Card from './Card'
 import MainMenu from './MainMenu'
-import { handleInitialCards } from '../actions/shared'
+// import { handleInitialCards } from '../actions/shared'
 
 class Dashboard extends Component {
     state = {
         selectedTab: 'unanswered'
     }
 
-    componentDidMount () {
-        this.props.dispatch(handleInitialCards())
-    }
+    // componentDidMount () {
+    //     this.props.dispatch(handleInitialCards())
+    // }
 
     render () {
         const { completedCards, uncompletedCards,loadingBar } = this.props

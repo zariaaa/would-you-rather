@@ -10,12 +10,14 @@ import AddCard from './AddCard'
 import Scoreboard from './Scoreboard'
 import Error404 from './Error404'
 import { PrivateRoute } from './PrivateRoute'
+import { handleInitialCards } from '../actions/shared'
 
 
 class App extends Component {
   componentDidMount() {
     const AUTHED_ID = null;
     this.props.dispatch((handleInitialUsers(AUTHED_ID)))
+    this.props.dispatch(handleInitialCards())
   }
 
   render() {
