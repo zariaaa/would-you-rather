@@ -10,10 +10,6 @@ class CardContent extends Component {
     state = {
         selectedQuestion: ''
     }
-
-    componentDidMount () {
-        this.props.dispatch(handleInitialCards())
-    }
     
     selectRadio = (e) => {
         this.setState({
